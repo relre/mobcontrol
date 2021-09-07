@@ -1901,10 +1901,11 @@ GameObject:
   - component: {fileID: 8654250720420943610}
   - component: {fileID: 8654250720411597152}
   - component: {fileID: 8015498936546075672}
+  - component: {fileID: 4723864185586742559}
   - component: {fileID: -8150013100646860392}
   m_Layer: 0
   m_Name: MaleDummy
-  m_TagString: Untagged
+  m_TagString: PlayerMob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1960,6 +1961,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &4723864185586742559
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8654250720420973338}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85824525, y: 1.8468943, z: 0.72962576}
+  m_Center: {x: 0.07087737, y: 1.0081017, z: 0.006316215}
 --- !u!195 &-8150013100646860392
 NavMeshAgent:
   m_ObjectHideFlags: 0
