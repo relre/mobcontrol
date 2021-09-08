@@ -15,7 +15,7 @@ public class MobManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        replicator = GameObject.FindGameObjectWithTag("ReplicatorScript").GetComponent<Replicator>();
+        replicator = GameObject.FindGameObjectWithTag("Replicator").GetComponent<Replicator>();
         mobNavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -33,6 +33,11 @@ public class MobManager : MonoBehaviour
             gameManager.towerNumber--;
             Destroy(gameObject);
         }
+
+        if (other.gameObject.CompareTag("DangerZone"))
+        {
+            Destroy(gameObject);
+        }
        
     }
 
@@ -42,7 +47,7 @@ public class MobManager : MonoBehaviour
         spawnPos = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z + otherPositionZDistance);
         if (other.gameObject.CompareTag("Replicator"))
         {
-            for (int i = 0; i < replicator.replicatorNumber; i++)
+            for (int i = 0; i < other.gameObject.GetComponent<Replicator>().replicatorNumber; i++)
             {
                 if (gameObject.tag == "PlayerMob")
                 {
