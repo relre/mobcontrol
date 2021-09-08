@@ -7,7 +7,9 @@ public class MobManager : MonoBehaviour
 {
     GameManager gameManager;
     NavMeshAgent mobNavMeshAgent;
-    
+
+    Vector3 spawnPos;
+    float otherPositionZDistance = 1f;
     
     void Start()
     {
@@ -27,14 +29,22 @@ public class MobManager : MonoBehaviour
             gameManager.towerNumber--;
             Destroy(gameObject);
         }
+       
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        spawnPos = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z + otherPositionZDistance);
         if (other.gameObject.CompareTag("Replicator"))
         {
-            Instantiate(gameManager.playerMob, transform.position, Quaternion.identity);
-            Instantiate(gameManager.playerMob, transform.position, Quaternion.identity);
+
+            for (int i = 0; i < 4; i++)
+            {
+                Instantiate(gameManager.playerMob, spawnPos, Quaternion.identity);
+            }
+            
+
+
         }
     }
-    void MobSpawner()
-    {
-        
-    }
+ 
 }
