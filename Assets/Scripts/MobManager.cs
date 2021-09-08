@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class MobManager : MonoBehaviour
 {
     GameManager gameManager;
+    Replicator replicator;
     NavMeshAgent mobNavMeshAgent;
 
     Vector3 spawnPos;
@@ -14,6 +15,7 @@ public class MobManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        replicator = GameObject.FindGameObjectWithTag("ReplicatorScript").GetComponent<Replicator>();
         mobNavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -21,6 +23,8 @@ public class MobManager : MonoBehaviour
     {
         mobNavMeshAgent.SetDestination(gameManager.mobTarget.transform.position);
     }
+
+    // tower trigger 
     private void OnTriggerEnter(Collider other)
     {
 
@@ -31,19 +35,25 @@ public class MobManager : MonoBehaviour
         }
        
     }
+
+    // replicator trigger
     private void OnTriggerExit(Collider other)
     {
         spawnPos = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z + otherPositionZDistance);
         if (other.gameObject.CompareTag("Replicator"))
         {
-
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < replicator.replicatorNumber; i++)
             {
-                Instantiate(gameManager.playerMob, spawnPos, Quaternion.identity);
+                if (gameObject.tag == "PlayerMob")
+                {
+                    Instantiate(gameManager.playerMob, spawnPos, Quaternion.identity);
+                }
+                else if (gameObject.tag == "PlayerSuperMob")
+                {
+                    Instantiate(gameManager.playerSuperMob, spawnPos, Quaternion.identity);
+                }
+
             }
-            
-
-
         }
     }
  

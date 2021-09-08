@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class TouchController : MonoBehaviour
 {
     GameManager gameManager;
+
     
-    float cannonNextFire;
-    float cannonMaxPositionX = 4.5f;
 
     float touchSpeed = 0.01f;
     void Start()
@@ -18,21 +17,18 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time > cannonNextFire)
+        if (Input.GetMouseButtonDown(0) && Time.time > gameManager.cannonNextFire)
         {
-            cannonNextFire = Time.time + gameManager.cannonFireRate;
-            PlayerMobSpawner();
+            gameManager.PlayerMobSpawner();
         }
 
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Began && Time.time > cannonNextFire)
+            if (touch.phase == TouchPhase.Began && Time.time > gameManager.cannonNextFire)
             {
-                cannonNextFire = Time.time + gameManager.cannonFireRate;
-
-                Instantiate(gameManager.playerMob, gameManager.cannon.transform.position, Quaternion.identity);
+                gameManager.PlayerMobSpawner();
             }
             if (touch.phase == TouchPhase.Moved)
             {
@@ -42,19 +38,16 @@ public class TouchController : MonoBehaviour
                     gameManager.cannon.transform.position.z);
 
                 // cannon position bound
-                if (gameManager.cannon.transform.position.x > cannonMaxPositionX)
+                if (gameManager.cannon.transform.position.x > gameManager.cannonMaxPositionX)
                 {
-                    gameManager.cannon.transform.position = new Vector3(cannonMaxPositionX, gameManager.cannon.transform.position.y, gameManager.cannon.transform.position.z);
+                    gameManager.cannon.transform.position = new Vector3(gameManager.cannonMaxPositionX, gameManager.cannon.transform.position.y, gameManager.cannon.transform.position.z);
                 }
-                if (gameManager.cannon.transform.position.x < -cannonMaxPositionX)
+                if (gameManager.cannon.transform.position.x < -gameManager.cannonMaxPositionX)
                 {
-                    gameManager.cannon.transform.position = new Vector3(-cannonMaxPositionX, gameManager.cannon.transform.position.y, gameManager.cannon.transform.position.z);
+                    gameManager.cannon.transform.position = new Vector3(-gameManager.cannonMaxPositionX, gameManager.cannon.transform.position.y, gameManager.cannon.transform.position.z);
                 }
             }
         }
     }
-    void PlayerMobSpawner()
-    {
-        Instantiate(gameManager.playerMob, gameManager.cannon.transform.position, Quaternion.identity);
-    }
+    
 }
