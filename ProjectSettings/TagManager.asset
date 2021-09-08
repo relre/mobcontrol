@@ -8,7 +8,6 @@ TagManager:
   - PlayerMob
   - Tower
   - Replicator
-  - ReplicatorScript
   - PlayerSuperMob
   - DangerZone
   layers:

@@ -17,38 +17,52 @@ public class GameManager : MonoBehaviour
     public float cannonMaxPositionX = 2.33f;
     public float cannonNextFire;
 
-    public Image powerImage;
-    float powerForce = 0f;
-    float powerForceMax = 10f;
+    Vector3 cannonSpawnPosition;
+    float cannonSpawnDistance = 0.8f;
+
+    public Image cannonEnergyImage;
+    public Material gold;
+    public Material black;
+    float cannonEnergy = 0f;
+    float cannonEnergyMax = 10f;
+    
 
 
     void Start()
     {
-        
+        cannonSpawnPosition = new Vector3(cannon.transform.position.x, cannon.transform.position.y, cannon.transform.position.z + cannonSpawnDistance);
     }
 
     void Update()
     {
         towerNumberText.text = towerNumber.ToString();
-        PowerEnergy();
+        CannonEnergy();
     }
 
-    void PowerEnergy()
+    void CannonEnergy()
     {
-        powerImage.fillAmount = powerForce / powerForceMax;
+        cannonEnergyImage.fillAmount = cannonEnergy / cannonEnergyMax;
+        if (cannonEnergyImage.fillAmount == 0.9f)
+        {
+            cannon.GetComponent<Renderer>().material = gold;
+        }
+        else
+        {
+            cannon.GetComponent<Renderer>().material = black;
+        }
     }
     public void PlayerMobSpawner()
     {
         cannonNextFire = Time.time + cannonFireRate;
-        powerForce++;
-        if (powerForce < powerForceMax)
+        cannonEnergy++;
+        if (cannonEnergy < cannonEnergyMax)
         {
-            Instantiate(playerMob, cannon.transform.position, Quaternion.identity);
+            Instantiate(playerMob, cannonSpawnPosition, Quaternion.identity);
         }
-        else if (powerForce == powerForceMax)
+        else if (cannonEnergy == cannonEnergyMax)
         {
-            Instantiate(playerSuperMob, cannon.transform.position, Quaternion.identity);
-            powerForce = 0;
+            Instantiate(playerSuperMob, cannonSpawnPosition, Quaternion.identity);
+            cannonEnergy = 0;
         }
         
     }
