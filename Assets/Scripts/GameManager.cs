@@ -8,9 +8,12 @@ public class GameManager : MonoBehaviour
 {
     public GameObject playerMob;
     public GameObject playerSuperMob;
+    public GameObject enemyMob;
     public GameObject mobTarget;
+    public GameObject enemyTarget;
     public GameObject cannon;
 
+    public GameObject tower;
     public TextMeshProUGUI towerNumberText;
     public int towerNumber = 100;
     public float cannonFireRate = 0.2f;
@@ -25,8 +28,8 @@ public class GameManager : MonoBehaviour
     public Material black;
     float cannonEnergy = 0f;
     float cannonEnergyMax = 10f;
-    
 
+    public GameObject cube;
 
     void Start()
     {
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         towerNumberText.text = towerNumber.ToString();
         CannonEnergy();
+        EnemyMobSpawner();
     }
 
     void CannonEnergy()
@@ -63,7 +67,20 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(playerSuperMob, cannonSpawnPosition, Quaternion.identity);
             cannonEnergy = 0;
+        }   
+    }
+
+    public void EnemyMobSpawner()
+    {
+        Vector3 enemyMobPosition = new Vector3(tower.transform.position.x, 0.5f, tower.transform.position.z - 2);
+        Quaternion enemyMobRotation = new Quaternion(transform.position.x, 180, transform.position.z, transform.position.z);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Instantiate(enemyMob, enemyMobPosition, enemyMobRotation);
+            }
+            
         }
-        
     }
 }

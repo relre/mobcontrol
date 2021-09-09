@@ -52,6 +52,7 @@ public class MobManager : MonoBehaviour
                 if (gameObject.tag == "PlayerMob")
                 {
                     Instantiate(gameManager.playerMob, spawnPos, Quaternion.identity);
+
                 }
                 else if (gameObject.tag == "PlayerSuperMob")
                 {

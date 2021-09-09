@@ -10,6 +10,7 @@ TagManager:
   - Replicator
   - PlayerSuperMob
   - DangerZone
+  - EnemyMob
   layers:
   - Default
   - TransparentFX
