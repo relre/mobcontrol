@@ -26,21 +26,17 @@ public class MobManager : MonoBehaviour
     void MobTargetDestination()
     {
         mobNavMeshAgent.SetDestination(gameManager.mobTarget.transform.position);
-
     }
 
     // tower trigger 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.CompareTag("Tower"))
         {
             gameManager.towerNumber--;
-
             if (gameObject.tag == "PlayerMob")
             {
                 gameManager.score += gameManager.scoreTowerPlayerMob;
-
             }
             else if (gameObject.tag == "PlayerSuperMob")
             {
@@ -67,7 +63,6 @@ public class MobManager : MonoBehaviour
                 if (gameObject.tag == "PlayerMob")
                 {
                     Instantiate(gameManager.playerMob, spawnPos, Quaternion.identity);
-
                 }
                 else if (gameObject.tag == "PlayerSuperMob")
                 {

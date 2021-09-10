@@ -17,7 +17,6 @@ public class LevelSystem : MonoBehaviour
        
         LockOpen();
     }
-
     public void LockOpen()
     {
         for (int i = 0; i < PlayerPrefs.GetInt("level"); i++)
@@ -32,12 +31,10 @@ public class LevelSystem : MonoBehaviour
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
         return sceneName;
     }
-
     public void LevelOpen(int id)
     {
         SceneManager.LoadScene(levelID(id));
     }
-
     // clear all prefs
     public void ClearPref() 
     {
