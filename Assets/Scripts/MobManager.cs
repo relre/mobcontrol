@@ -6,22 +6,27 @@ using UnityEngine.AI;
 public class MobManager : MonoBehaviour
 {
     GameManager gameManager;
-    Replicator replicator;
     NavMeshAgent mobNavMeshAgent;
 
     Vector3 spawnPos;
     float otherPositionZDistance = 1f;
-    
+
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        replicator = GameObject.FindGameObjectWithTag("Replicator").GetComponent<Replicator>();
         mobNavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
+        MobTargetDestination();
+    }
+
+    // set player agent target
+    void MobTargetDestination()
+    {
         mobNavMeshAgent.SetDestination(gameManager.mobTarget.transform.position);
+
     }
 
     // tower trigger 
@@ -31,6 +36,16 @@ public class MobManager : MonoBehaviour
         if (other.gameObject.CompareTag("Tower"))
         {
             gameManager.towerNumber--;
+
+            if (gameObject.tag == "PlayerMob")
+            {
+                gameManager.score += gameManager.scoreTowerPlayerMob;
+
+            }
+            else if (gameObject.tag == "PlayerSuperMob")
+            {
+                gameManager.score += gameManager.scoreTowerSuperMob;
+            }
             Destroy(gameObject);
         }
 
@@ -38,7 +53,7 @@ public class MobManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-       
+
     }
 
     // replicator trigger
@@ -62,5 +77,5 @@ public class MobManager : MonoBehaviour
             }
         }
     }
- 
+
 }

@@ -7,7 +7,7 @@ public class TouchController : MonoBehaviour
 {
     GameManager gameManager;
 
-    
+
 
     float touchSpeed = 0.01f;
     void Start()
@@ -17,7 +17,7 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time > gameManager.cannonNextFire)
+        if (Input.GetMouseButtonDown(0) && Time.time > gameManager.cannonTimer)
         {
             gameManager.PlayerMobSpawner();
         }
@@ -26,7 +26,7 @@ public class TouchController : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Began && Time.time > gameManager.cannonNextFire)
+            if (touch.phase == TouchPhase.Began && Time.time > gameManager.cannonTimer)
             {
                 gameManager.PlayerMobSpawner();
             }
@@ -49,5 +49,5 @@ public class TouchController : MonoBehaviour
             }
         }
     }
-    
+
 }

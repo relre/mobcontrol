@@ -11,6 +11,8 @@ TagManager:
   - PlayerSuperMob
   - DangerZone
   - EnemyMob
+  - EnemyTarget
+  - SceneChanger
   layers:
   - Default
   - TransparentFX
